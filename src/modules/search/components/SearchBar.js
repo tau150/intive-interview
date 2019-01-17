@@ -3,7 +3,9 @@ import { Button, Col, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-    label
+	.text-danger {
+		position: absolute;
+	}
 `;
 
 const StyledH1 = styled.h1`
@@ -27,8 +29,39 @@ class SearchBar extends Component {
 			'Left-Back',
 			'Right-Back'
 		],
-		age: ''
+		selectedPosition: '',
+		age: '',
+		validationMessages: {
+			age: null,
+			name: null
+		}
 	};
+
+	handleNameInput = e => {
+		this.setState({ name: e.target.value });
+	};
+
+	handlePositionInput = e => {
+		this.setState({ selectedPosition: e.target.value });
+	};
+
+	handleAgeInput = e => {
+		this.setState({ age: e.target.value });
+
+		if (e.target.value === '') {
+			this.setState({ age: '' });
+		}
+		if (e.target.value < 18 || e.target.value > 40) {
+			this.setState({ validationMessages: { age: 'Age must be between 18 and 40' } });
+		} else {
+			this.setState({ validationMessages: { age: null } });
+		}
+
+		if (e.target.value === '') {
+			this.setState({ validationMessages: { age: null } });
+		}
+	};
+
 	render() {
 		return (
 			<StyledDiv>
@@ -36,13 +69,26 @@ class SearchBar extends Component {
 				<Form inline>
 					<Col md={3}>
 						<FormGroup>
-							<Input type="text" name="name" id="name" placeholder="Name" />
+							<Input
+								onChange={this.handleNameInput}
+								type="text"
+								name="name"
+								id="name"
+								value={this.state.name}
+								placeholder="Name"
+							/>
 						</FormGroup>
 					</Col>
 					<Col md={3}>
 						<FormGroup>
-							<Input type="select" name="email" id="exampleEmail" placeholder="Position">
-								<option>Position</option>
+							<Input
+								onChange={this.handlePositionInput}
+								type="select"
+								name="email"
+								id="exampleEmail"
+								placeholder="Position"
+							>
+								<option value="">Position</option>
 								{this.state.positions.map(position => {
 									return <option value={position}>{position}</option>;
 								})}
@@ -51,11 +97,33 @@ class SearchBar extends Component {
 					</Col>
 					<Col md={3}>
 						<FormGroup>
-							<Input type="email" name="email" id="exampleEmail" placeholder="Age" />
+							<Input
+								onChange={this.handleAgeInput}
+								type="number"
+								name="email"
+								value={this.state.age}
+								id="exampleEmail"
+								placeholder="Age"
+							/>
 						</FormGroup>
+						{this.state.validationMessages.age ? (
+							<p className="text-danger">{this.state.validationMessages.age}</p>
+						) : (
+							''
+						)}
 					</Col>
 
-					<Button>Submit</Button>
+					<Button
+						disabled={
+							(this.state.selectedPosition === '' && this.state.name === '' && this.state.age === '') ||
+							(this.state.age < 18 && this.state.age !== '') ||
+							this.state.age > 40
+								? true
+								: false
+						}
+					>
+						Submit
+					</Button>
 				</Form>
 			</StyledDiv>
 		);
