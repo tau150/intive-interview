@@ -9,3 +9,7 @@ export const STOP_LOADING = 'STOP_LOADING';
 // Notifications Module
 export const START_TOAST = 'START_TOAST';
 export const CLEAN_TOAST = 'CLEAN_TOAST';
+
+// Search Module
+
+export const SEARCH_FILTERS = 'SEARCH_FILTERS';
