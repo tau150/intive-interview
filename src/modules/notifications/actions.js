@@ -12,6 +12,6 @@ export const startToast = (type, message) => {
 
 export const cleanToast = () => {
 	return {
-		type: types.START_TOAST
+		type: types.CLEAN_TOAST
 	};
 };

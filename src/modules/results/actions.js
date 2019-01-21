@@ -21,7 +21,6 @@ export const fetchPlayersSuccess = players => {
 export const fetchPlayers = () => {
 	return async dispatch => {
 		dispatch(startLoading());
-
 		try {
 			const players = await fetchPlayersApi();
 			dispatch(fetchPlayersSuccess(players.data));

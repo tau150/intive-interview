@@ -22,8 +22,8 @@ class App extends Component {
 			<div className="App">
 				<Notifications />
 				<div className="container">
-					{this.props.isLoading ? <Loading /> : ''}
-					<SearchBar />
+					{this.props.isLoading ? <Loading id="loading" /> : ''}
+					<SearchBar id="searchBar" />
 					<ResultsTable />
 				</div>
 			</div>
