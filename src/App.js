@@ -6,36 +6,36 @@ import ResultsTable from './modules/results/components/ResultsTable';
 import Loading from './modules/UI/components/Loading';
 import { getLoading } from './modules/UI/selectors';
 
-class App extends Component {
-	componentDidUpdate() {
-		if (this.props.toastType === 'error') {
-			notify.show(this.props.message, 'error');
-		}
+export class App extends Component {
+  componentDidUpdate() {
+    if (this.props.toastType === 'error') {
+      notify.show(this.props.message, 'error');
+    }
 
-		if (this.props.toastType === 'success') {
-			notify.show(this.props.message, 'success');
-		}
-	}
+    if (this.props.toastType === 'success') {
+      notify.show(this.props.message, 'success');
+    }
+  }
 
-	render() {
-		return (
-			<div className="App">
-				<Notifications />
-				<div className="container">
-					{this.props.isLoading ? <Loading id="loading" /> : ''}
-					<SearchBar id="searchBar" />
-					<ResultsTable />
-				</div>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="App">
+        <Notifications />
+        <div className="container">
+          {this.props.isLoading ? <Loading id="loading" /> : ''}
+          <SearchBar id="searchBar" />
+          <ResultsTable />
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		isLoading: getLoading(state),
-		message: state.toast.message,
-		toastType: state.toast.type
-	};
+  return {
+    isLoading: getLoading(state),
+    message: state.toast.message,
+    toastType: state.toast.type,
+  };
 };
 export default connect(mapStateToProps)(App);
