@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import SearchBar from './SearchBar';
+import { shallow, mount, render } from 'enzyme';
+import { SearchBar } from './SearchBar';
+import { Provider } from 'react-redux';
+import store from '../../../db/store';
 
-const wrapper = shallow(<SearchBar />);
+const wrapper = mount(<SearchBar />);
 
 describe('<SearchBar /> component', () => {
   it('renders one <SearchBar /> component', () => {
@@ -10,13 +12,18 @@ describe('<SearchBar /> component', () => {
   });
 });
 
-// describe('Buttons actions', () => {
-//   it('submt button should be disabled is there are not any filter selected', () => {
-//     // expect(wrapper)
-//     //   .find('#submit-button')
-//     //   .is('[disabled]')
-//     //   .toBe(true);
+describe('Buttons actions', () => {
+  it('submit button should be disabled if there are not any filter selected', () => {
+    const button = wrapper.find('#submit-button').first();
+    expect(button.props().disabled).toEqual(true);
+  });
 
-//     expect(wrapper.find('#submit-button').length).toBe(1);
-//   });
-// });
+  it('submit button should be enabled if there are any filter selected', () => {
+    wrapper.setState({
+      age: '22',
+    });
+    const button = wrapper.find('#submit-button').first();
+    expect(button.props().disabled).toEqual(false);
+  });
+});
+// console.log(wrapper.instance().props);

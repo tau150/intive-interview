@@ -20,7 +20,7 @@ const StyledH1 = styled.h1`
   text-align: left;
 `;
 
-class SearchBar extends Component {
+export class SearchBar extends Component {
   state = {
     name: '',
     positions: [
