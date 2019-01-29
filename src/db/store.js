@@ -18,4 +18,6 @@ const rootReducer = combineReducers({
   loading: uiReducer.loading,
   toast: notificationReducer.toast,
 });
+
+
 export default createStore(rootReducer, applyMiddleware(thunk));

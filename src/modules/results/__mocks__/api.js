@@ -17,18 +17,9 @@ const players = [
 	}
 ];
 
-// export const getPlayersMock = async () => {
-// 	return await new Promise((resolve, reject) => {
-// 		resolve({ response: players });
-// 		reject({
-// 			error: 'there was an error'
-// 		});
-// 	});
-// };
-
 export default {
-	getPlayersMock: async () => {
-		return await new Promise((resolve, reject) => {
+	getPlayersMock: () => {
+		return new Promise((resolve, reject) => {
 			resolve({ response: players });
 			reject({
 				error: 'there was an error'
@@ -36,17 +27,3 @@ export default {
 		});
 	}
 };
-// export default () => {
-// 	return new Promise((resolve, reject) => {
-// 		resolve(players);
-// 		reject({
-// 			error: 'there was an error'
-// 		});
-// 	});
-// };
-
-// export default {
-// 	getPlayers: jest.fn(() => {
-
-// 	})
-// };

@@ -10,15 +10,26 @@ const StyledDiv = styled.div`
 	margin-top: 3%;
 `;
 
-class ResultsTable extends Component {
+export class ResultsTable extends Component {
+	state = {
+		firstRender: true
+	};
 	componentDidMount() {
 		this.props.fetchPlayers();
+		this.setState({ firstRender: false });
 	}
+
 	render() {
 		if (!this.props.players) return null;
 
+		let nodata = !this.state.firstRender ? (
+			<NoData id="no-data" message="There is not data available for selected filters" />
+		) : (
+			''
+		);
+
 		return (
-			<StyledDiv>
+			<StyledDiv className="main-container">
 				<Table striped>
 					<thead>
 						<tr>
@@ -28,6 +39,7 @@ class ResultsTable extends Component {
 							<th>Age</th>
 						</tr>
 					</thead>
+
 					{this.props.players.length > 0 ? (
 						<tbody>
 							{this.props.players.map(player => {
@@ -48,7 +60,7 @@ class ResultsTable extends Component {
 							})}
 						</tbody>
 					) : (
-						<NoData message="There is not data available for" />
+						nodata
 					)}
 				</Table>
 			</StyledDiv>

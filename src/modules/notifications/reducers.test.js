@@ -1,35 +1,28 @@
-import notificationReducer from './reducers';
 import * as types from '../../constants/actionTypes';
+import reducer from './reducers';
 
-let state = {};
 const initialState = { type: null, message: null };
 
-test('reducer should return state for default case', () => {
-	const action = notificationReducer.toast((state = initialState), 'action');
-	expect(action).toEqual(state);
+describe('notifications reducer', () => {
+	it('should return the initial state', () => {
+		expect(reducer.toast(undefined, {})).toEqual(initialState);
+	});
+
+	it('should handle START_TOAST', () => {
+		const action = {
+			type: types.START_TOAST,
+			payload: {
+				type: 'success',
+				message: 'toast message'
+			}
+		};
+		expect(reducer.toast({}, action)).toEqual({ type: 'success', message: 'toast message' });
+	});
+
+	it('should handle CLEAN_TOAST', () => {
+		const action = {
+			type: types.CLEAN_TOAST
+		};
+		expect(reducer.toast({}, action)).toEqual({ type: null, message: null });
+	});
 });
-
-// test('reducer should return state for default case', () => {
-// 	const action = notificationReducer.toast({ type: null, message: null }, types.START_TOAST);
-// 	expect(action).toEqual({
-// 		...state,
-// 	});
-// });
-
-// const initialState = {
-// 	type: null,
-// 	message: null
-// };
-
-// export default {
-// 	toast: (state = initialState, action) => {
-// 		switch (action.type) {
-// 			case types.START_TOAST:
-// 				return { ...state, type: action.payload.type, message: action.payload.message };
-// 			case types.CLEAN_TOAST:
-// 				return { ...state, type: null, message: null };
-// 			default:
-// 				return state;
-// 		}
-// 	}
-// };

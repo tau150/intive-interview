@@ -103,7 +103,7 @@ export class SearchBar extends Component {
 		return (
 			<StyledDiv>
 				<StyledH1>Football Player Finder</StyledH1>
-				<Form inline onSubmit={this.handleFormSubmit}>
+				<Form id="submit-form" inline onSubmit={this.handleFormSubmit}>
 					<Col md={3}>
 						<FormGroup>
 							<Input

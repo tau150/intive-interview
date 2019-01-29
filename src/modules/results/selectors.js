@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
-// create select functions tto pick off the pieces of state we care about for this calculation
 
 const playersSelector = state => state.players.players;
 const selectedSearchFilters = state => state.searchFilters.filters;
 
-const getPlayers = (playersSelector, selectedSearchFilters) => {
+export const getPlayers = (playersSelector, selectedSearchFilters) => {
 	let selectedPlayers = playersSelector;
 
 	if (selectedSearchFilters.name) {
