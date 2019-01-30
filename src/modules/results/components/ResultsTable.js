@@ -6,8 +6,17 @@ import { Table } from 'reactstrap';
 import { fetchPlayers } from '../actions';
 import PlayersSelector from '../selectors';
 import NoData from '../../UI/components/NoData';
+
 const StyledDiv = styled.div`
 	margin-top: 3%;
+
+	table {
+		position: relative;
+	}
+
+	thead {
+		heigth: 50px;
+	}
 `;
 
 export class ResultsTable extends Component {
@@ -16,17 +25,10 @@ export class ResultsTable extends Component {
 	};
 	componentDidMount() {
 		this.props.fetchPlayers();
-		this.setState({ firstRender: false });
 	}
 
 	render() {
 		if (!this.props.players) return null;
-
-		let nodata = !this.state.firstRender ? (
-			<NoData id="no-data" message="There is not data available for selected filters" />
-		) : (
-			''
-		);
 
 		return (
 			<StyledDiv className="main-container">
@@ -60,7 +62,12 @@ export class ResultsTable extends Component {
 							})}
 						</tbody>
 					) : (
-						nodata
+						''
+					)}
+					{!this.props.fetching ? (
+						<NoData id="no-data" message="There is not data available for selected filters" />
+					) : (
+						''
 					)}
 				</Table>
 			</StyledDiv>
@@ -70,7 +77,8 @@ export class ResultsTable extends Component {
 
 const mapStateToProps = state => {
 	return {
-		players: PlayersSelector(state)
+		players: PlayersSelector(state).selectedPlayers,
+		fetching: PlayersSelector(state).allPlayers
 	};
 };
 export default connect(
