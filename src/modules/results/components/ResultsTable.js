@@ -64,7 +64,7 @@ export class ResultsTable extends Component {
 					) : (
 						''
 					)}
-					{!this.props.fetching ? (
+					{this.props.fetching === false ? (
 						<NoData id="no-data" message="There is not data available for selected filters" />
 					) : (
 						''
@@ -76,9 +76,12 @@ export class ResultsTable extends Component {
 }
 
 const mapStateToProps = state => {
+	const selectorResult = PlayersSelector(state);
+
+	console.log(selectorResult);
 	return {
-		players: PlayersSelector(state).selectedPlayers,
-		fetching: PlayersSelector(state).allPlayers
+		players: selectorResult.selectedPlayers,
+		fetching: selectorResult.allPlayers
 	};
 };
 export default connect(

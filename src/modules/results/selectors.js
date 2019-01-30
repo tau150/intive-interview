@@ -97,7 +97,10 @@ export const getPlayers = (playersSelector, selectedSearchFilters) => {
 			});
 	}
 
-	return { selectedPlayers, allPlayers: playersSelector.length === selectedPlayers.length ? true : false };
+	return {
+		selectedPlayers,
+		allPlayers: playersSelector.length === selectedPlayers.length || selectedPlayers.length > 0 ? true : false
+	};
 };
 
 export default createSelector(
