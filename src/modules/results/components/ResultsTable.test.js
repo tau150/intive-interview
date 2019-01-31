@@ -43,7 +43,7 @@ describe('<ResultsTable /> component', () => {
 
 	it(' should render <NoData /> if players are not defined', () => {
 		wrapper.setProps({
-			players: []
+			fetching: false
 		});
 		expect(wrapper.find('#no-data')).toHaveLength(1);
 	});

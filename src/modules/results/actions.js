@@ -27,6 +27,7 @@ export const fetchPlayers = () => {
 			dispatch(stopLoading());
 		} catch (err) {
 			dispatch(stopLoading());
+
 			dispatch(startToast('error', err.response.data.error));
 			setTimeout(() => {
 				dispatch(cleanToast());

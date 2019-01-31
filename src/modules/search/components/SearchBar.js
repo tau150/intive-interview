@@ -17,7 +17,7 @@ const StyledDiv = styled.div`
 
 const StyledH1 = styled.h1`
 	margin: 5% 0;
-	text-align: left;
+	text-align: center;
 `;
 
 export class SearchBar extends Component {
@@ -79,9 +79,9 @@ export class SearchBar extends Component {
 		});
 
 		const filters = {
-			name: null,
-			selectedPosition: null,
-			age: null
+			name: undefined,
+			selectedPosition: undefined,
+			age: undefined
 		};
 
 		this.props.setSearchFilters(filters);
@@ -91,9 +91,9 @@ export class SearchBar extends Component {
 		e.preventDefault();
 
 		const filters = {
-			name: this.state.name.trim() || null,
-			selectedPosition: this.state.selectedPosition || null,
-			age: this.state.age || null
+			name: this.state.name.trim() || undefined,
+			selectedPosition: this.state.selectedPosition || undefined,
+			age: this.state.age || undefined
 		};
 
 		this.props.setSearchFilters(filters);
@@ -127,8 +127,8 @@ export class SearchBar extends Component {
 								value={this.state.selectedPosition}
 							>
 								<option value="">Position</option>
-								{this.state.positions.map(position => {
-									return <option>{position}</option>;
+								{this.state.positions.map((position, i) => {
+									return <option key={i}>{position}</option>;
 								})}
 							</Input>
 						</FormGroup>

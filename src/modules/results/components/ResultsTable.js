@@ -20,9 +20,6 @@ const StyledDiv = styled.div`
 `;
 
 export class ResultsTable extends Component {
-	state = {
-		firstRender: true
-	};
 	componentDidMount() {
 		this.props.fetchPlayers();
 	}
@@ -62,7 +59,7 @@ export class ResultsTable extends Component {
 							})}
 						</tbody>
 					) : (
-						''
+						<tbody />
 					)}
 					{this.props.fetching === false ? (
 						<NoData id="no-data" message="There is not data available for selected filters" />
@@ -77,11 +74,10 @@ export class ResultsTable extends Component {
 
 const mapStateToProps = state => {
 	const selectorResult = PlayersSelector(state);
-
-	console.log(selectorResult);
 	return {
+		toastType: state.toast.type,
 		players: selectorResult.selectedPlayers,
-		fetching: selectorResult.allPlayers
+		fetching: selectorResult.notInitialFetching
 	};
 };
 export default connect(
